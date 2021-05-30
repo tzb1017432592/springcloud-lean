@@ -27,7 +27,7 @@ spring:
         - id: eureka-rabbitmq-producer
           uri: lb://eureka-rabbitmq-producer
           predicates:
-            - Path=/rabbitmq/**
+            - Path=/rabbitmq/producer/**
 
         - id: eureka-rabbitmq-consumer
           uri: lb://eureka-rabbitmq-consumer
@@ -67,7 +67,7 @@ spring:
         - id: eureka-rabbitmq-producer
           uri: lb://eureka-rabbitmq-producer
           predicates:
-            - Path=/rabbitmq/**
+            - Path=/rabbitmq/producer/**
 
         - id: eureka-rabbitmq-consumer
           uri: lb://eureka-rabbitmq-consumer
@@ -108,7 +108,7 @@ spring:
         - id: eureka-rabbitmq-producer
           uri: lb://eureka-rabbitmq-producer
           predicates:
-            - Path=/rabbitmq/**
+            - Path=/rabbitmq/producer/**
 
         - id: eureka-rabbitmq-consumer
           uri: lb://eureka-rabbitmq-consumer

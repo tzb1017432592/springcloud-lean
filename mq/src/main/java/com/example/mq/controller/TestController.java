@@ -2,9 +2,11 @@ package com.example.mq.controller;
 
 import com.example.mq.config.RabbitmqConfig;
 import com.example.mq.config.RabbitmqDelayConfig;
+import com.example.mq.service.ProducerStreamService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +16,8 @@ import javax.annotation.Resource;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/rabbitmq/")
+@RequestMapping("/rabbitmq/producer")
+@Profile("mq01")
 @Slf4j
 public class TestController {
 
@@ -23,6 +26,9 @@ public class TestController {
 
     @Resource
     private RabbitTemplate rabbitTemplate;
+
+    @Resource
+    private ProducerStreamService producerStreamService;
 
     @GetMapping("producer1/{message}")
     public String producer1(@PathVariable("message") String message) {
@@ -48,4 +54,12 @@ public class TestController {
         log.info("发送延迟消息成功【{}】",new Date());
         return "success";
     }
+
+
+
+    @GetMapping("streamproducer1/{message}")
+    public String streamproducer1(@PathVariable("message") String message) {
+        return producerStreamService.rabbitMQSend(message)?"success":"fail";
+    }
+
 }

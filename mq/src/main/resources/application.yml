@@ -15,6 +15,14 @@ spring:
     username: guest
     password: guest
     virtual-host: cloudtest
+  cloud:
+    stream:
+      bindings:
+        #定义生产者通道
+        myOutput:
+          #定义交换机名称
+          destination:  stream_exchange
+
 
 ---
 server:
@@ -34,6 +42,12 @@ spring:
     username: guest
     password: guest
     virtual-host: cloudtest
-
+  cloud:
+    stream:
+      bindings:
+        #定义消费者通道
+        myInput:
+          #定义交换机名称
+          destination:  stream_exchange
 
 
