@@ -1,0 +1,76 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    #eureka 实例的hostname，可以是hostname，也可以自定义配置hostname
+    hostname: eureka-cluster01
+    #该实例的IP地址
+#    ip-address: 127.0.0.1
+    #该实例注册到服务中心的唯一ID
+    #instance-id: tzb1
+    #注册时客户端是否使用自己的IP而不是主机名，默认是false
+    prefer-ip-address: false
+  client:
+    fetch-registry: false
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka-cluster02:8762/eureka/,http://eureka-cluster03:8763/eureka/
+
+spring:
+  application:
+    name: eureka-cluster
+  profiles: pre01
+
+---
+server:
+  port: 8762
+
+eureka:
+  instance:
+    #eureka 实例的hostname，可以是hostname，也可以自定义配置hostname
+    hostname: eureka-cluster02
+    #该实例的IP地址
+#    ip-address: 127.0.0.1
+    #该实例注册到服务中心的唯一ID
+    #instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+    #instance-id: tzb2
+    #注册时客户端是否使用自己的IP而不是主机名，默认是false
+    prefer-ip-address: false
+  client:
+    fetch-registry: false
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka-cluster01:8761/eureka/,http://eureka-cluster03:8763/eureka/
+
+spring:
+  application:
+    name: eureka-cluster
+  profiles: pre02
+
+---
+server:
+  port: 8763
+
+
+eureka:
+  instance:
+    #eureka 实例的hostname，可以是hostname，也可以自定义配置hostname
+    hostname: eureka-cluster03
+    #该实例的IP地址
+    #    ip-address: 127.0.0.1
+    #该实例注册到服务中心的唯一ID
+    #instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+    #instance-id: tzb3
+    #注册时客户端是否使用自己的IP而不是主机名，默认是false
+    prefer-ip-address: false
+  client:
+    fetch-registry: false
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://eureka-cluster01:8761/eureka/,http://eureka-cluster02:8762/eureka/
+
+spring:
+  application:
+    name: eureka-cluster
+  profiles: pre03

@@ -1,0 +1,121 @@
+server:
+  port: 8851
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-cluster01:8761/eureka/,http://eureka-cluster02:8762/eureka/
+spring:
+  application:
+    name: eureka-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: eureka-client01
+          uri: lb://eureka-client01
+          predicates:
+            - Path=/client01/**
+
+        - id: eureka-consumer
+          uri: lb://eureka-consumer
+          predicates:
+            - Path=/consumer/**
+
+        - id: eureka-rabbitmq-producer
+          uri: lb://eureka-rabbitmq-producer
+          predicates:
+            - Path=/rabbitmq/**
+
+        - id: eureka-rabbitmq-consumer
+          uri: lb://eureka-rabbitmq-consumer
+          predicates:
+            - Path=/rabbitmq/**
+
+  profiles: gw01
+
+
+---
+server:
+  port: 8852
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-cluster01:8761/eureka/,http://eureka-cluster02:8762/eureka/
+spring:
+  application:
+    name: eureka-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: eureka-client01
+          uri: lb://eureka-client01
+          predicates:
+            - Path=/client01/**
+
+        - id: eureka-consumer
+          uri: lb://eureka-consumer
+          predicates:
+            - Path=/consumer/**
+
+        - id: eureka-rabbitmq-producer
+          uri: lb://eureka-rabbitmq-producer
+          predicates:
+            - Path=/rabbitmq/**
+
+        - id: eureka-rabbitmq-consumer
+          uri: lb://eureka-rabbitmq-consumer
+          predicates:
+            - Path=/rabbitmq/**
+
+
+  profiles: gw02
+
+
+---
+server:
+  port: 8853
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-cluster01:8761/eureka/,http://eureka-cluster02:8762/eureka/
+spring:
+  application:
+    name: eureka-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: eureka-client01
+          uri: lb://eureka-client01
+          predicates:
+            - Path=/client01/**
+
+        - id: eureka-consumer
+          uri: lb://eureka-consumer
+          predicates:
+            - Path=/consumer/**
+
+        - id: eureka-rabbitmq-producer
+          uri: lb://eureka-rabbitmq-producer
+          predicates:
+            - Path=/rabbitmq/**
+
+        - id: eureka-rabbitmq-consumer
+          uri: lb://eureka-rabbitmq-consumer
+          predicates:
+            - Path=/rabbitmq/**
+
+  profiles: gw03
+
+
+
