@@ -24,18 +24,4 @@ spring:
     name: eureka-client01
   profiles: cl02
 
----
-server:
-  port: 8753
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eureka-cluster01:8761/eureka/,http://eureka-cluster02:8762/eureka/,http://eureka-cluster03:8763/eureka/
-spring:
-  application:
-    name: eureka-consumer
-  profiles: cl03
-
-
 
